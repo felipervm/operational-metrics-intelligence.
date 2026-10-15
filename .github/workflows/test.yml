@@ -8,8 +8,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: |
+      - name: Rebuild dataset and landing page
+        run: |
           python src/build.py
           python src/build_site.py
-          python -m unittest discover -s tests -v
-          git diff --exit-code -- index.html data/fictional_tickets.csv data/analysis.json
+      - name: Validate computations and presentation
+        run: python -m unittest discover -s tests -v
+      - name: Verify reproducible public outputs
+        run: |
+          git diff --ignore-space-at-eol --exit-code -- index.html data/fictional_tickets.csv data/analysis.json
