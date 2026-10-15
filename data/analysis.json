@@ -1,0 +1,110 @@
+{
+  "scope": "Entirely synthetic; hypothetical cross-functional operations, not Fortra data",
+  "counts": {
+    "records": 180,
+    "resolved": 149,
+    "open": 31
+  },
+  "comparison": {
+    "IT dashboard": {
+      "numerator": 149,
+      "denominator": 180,
+      "definition": "All resolved tickets / all tickets opened",
+      "value": 82.8
+    },
+    "Security dashboard": {
+      "numerator": 21,
+      "denominator": 51,
+      "definition": "Critical tickets resolved inside SLA / all critical tickets",
+      "value": 41.2
+    }
+  },
+  "metric_gap_pp": 41.6,
+  "severity": [
+    {
+      "severity": "critical",
+      "total": 51,
+      "resolved": 43,
+      "open": 8,
+      "late_resolved": 22,
+      "sla_met_pct": 41.2,
+      "p75_resolution_hours": 101.0
+    },
+    {
+      "severity": "high",
+      "total": 52,
+      "resolved": 43,
+      "open": 9,
+      "late_resolved": 4,
+      "sla_met_pct": 75.0,
+      "p75_resolution_hours": 100.0
+    },
+    {
+      "severity": "medium",
+      "total": 51,
+      "resolved": 41,
+      "open": 10,
+      "late_resolved": 1,
+      "sla_met_pct": 78.4,
+      "p75_resolution_hours": 118.0
+    },
+    {
+      "severity": "low",
+      "total": 26,
+      "resolved": 22,
+      "open": 4,
+      "late_resolved": 0,
+      "sla_met_pct": 84.6,
+      "p75_resolution_hours": 92.0
+    }
+  ],
+  "teams": [
+    {
+      "team": "IT",
+      "total": 60,
+      "open": 10,
+      "resolved_pct": 83.3
+    },
+    {
+      "team": "Security",
+      "total": 60,
+      "open": 9,
+      "resolved_pct": 85.0
+    },
+    {
+      "team": "Compliance",
+      "total": 60,
+      "open": 12,
+      "resolved_pct": 80.0
+    }
+  ],
+  "findings": [
+    {
+      "priority": "P1",
+      "title": "Critical-item response is not meeting the defined SLA",
+      "observation": "Only 41.2% of critical items meet the defined SLA, counting unresolved items as not met.",
+      "decision": "Review critical-item routing and escalation thresholds before celebrating the overall closure rate.",
+      "proposed_owner": "Security Operations + IT Service Management",
+      "evidence": "Severity-specific SLA cohort; fictional records",
+      "validation": "Confirm SLA clock rules, pause states and severity taxonomy with both teams."
+    },
+    {
+      "priority": "P1",
+      "title": "One performance label, two incompatible definitions",
+      "observation": "The synthetic dashboards show 82.8% and 41.2%, a 41.6-point gap, because the numerator, denominator and SLA treatment differ.",
+      "decision": "Approve separate names and definitions rather than averaging the two scores.",
+      "proposed_owner": "Enterprise BI + IT + Security",
+      "evidence": "Metric contract and dashboard reconciliation",
+      "validation": "Check business purpose and sign off metric glossary with functional owners."
+    },
+    {
+      "priority": "P2",
+      "title": "Define a consistent operational review cadence",
+      "observation": "Reporting ownership and exceptions should be visible alongside each metric.",
+      "decision": "Use a monthly leadership review with named owners and exception commentary.",
+      "proposed_owner": "Business Intelligence + functional leads",
+      "evidence": "Proposed operating model, not an observed company process",
+      "validation": "Pilot definitions on approved data; measure reviewer workload before scaling."
+    }
+  ]
+}
