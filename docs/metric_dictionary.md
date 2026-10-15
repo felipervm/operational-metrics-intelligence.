@@ -13,4 +13,4 @@ All numbers in this project are fictional. These definitions represent an exampl
 
 ## Why two headline values should not be reconciled into one
 
-The 82.8% completion figure and 41.2% critical-item SLA figure are not competing measurements of the same KPI. They have different populations and criteria. The 'metric conflict' is **a presentation and semantics risk**: executives might erroneously treat both as generic effectiveness signals. An appropriate remedy is clearer names, contracts and decision context, not forcing a single number.
+The 82.8% completion figure and 41.2% critical-cohort sample-target figure are not competing measurements of the same KPI. They have different populations and criteria. The potential confusion is **a presentation and semantics risk**: executives might erroneously treat both as generic effectiveness signals. An appropriate remedy is clearer names, contracts and decision context, not forcing a single number.

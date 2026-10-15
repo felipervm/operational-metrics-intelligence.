@@ -15,7 +15,7 @@
     "Security dashboard": {
       "numerator": 21,
       "denominator": 51,
-      "definition": "Critical tickets resolved inside SLA / all critical tickets",
+      "definition": "Critical tickets resolved within the sample target / all created critical tickets",
       "value": 41.2
     }
   },
@@ -81,17 +81,17 @@
   "findings": [
     {
       "priority": "P1",
-      "title": "Critical-item response is not meeting the defined SLA",
-      "observation": "Only 41.2% of critical items meet the defined SLA, counting unresolved items as not met.",
-      "decision": "Review critical-item routing and escalation thresholds before celebrating the overall closure rate.",
+      "title": "Review critical-cohort completion against the sample target",
+      "observation": "41.2% of all created critical items were resolved within the illustrative target. Open items count as incomplete, not proven overdue.",
+      "decision": "Investigate critical-item routing and target-clock assumptions before assessing operational health.",
       "proposed_owner": "Security Operations + IT Service Management",
-      "evidence": "Severity-specific SLA cohort; fictional records",
-      "validation": "Confirm SLA clock rules, pause states and severity taxonomy with both teams."
+      "evidence": "Severity-specific created cohort; fictional records",
+      "validation": "Confirm target clock rules, pause states and severity taxonomy with both teams."
     },
     {
       "priority": "P1",
-      "title": "One performance label, two incompatible definitions",
-      "observation": "The synthetic dashboards show 82.8% and 41.2%, a 41.6-point gap, because the numerator, denominator and SLA treatment differ.",
+      "title": "Keep unlike KPI definitions explicit",
+      "observation": "Overall closure is 82.8%; critical intake completed within the sample target is 41.2%. These answer different questions, with different populations and completion criteria.",
       "decision": "Approve separate names and definitions rather than averaging the two scores.",
       "proposed_owner": "Enterprise BI + IT + Security",
       "evidence": "Metric contract and dashboard reconciliation",

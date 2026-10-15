@@ -4,13 +4,13 @@
 
 ## Decision
 
-Before interpreting a green high-level closure KPI as evidence of operational health, investigate severity-specific SLA performance and agree on the meaning of the metrics used in Risk, Security and IT reviews.
+Before interpreting a green high-level closure KPI as evidence of operational health, investigate severity-specific completion against the sample target and agree on the meaning of the metrics used in Risk, Security and IT reviews.
 
 ## What the synthetic records show
 
 - 180 fictional IT, Security and Compliance tickets; 149 resolved (82.8%), 31 open.
 - 51 critical tickets; 21 resolved within the exercise’s invented time target (41.2% across the full created cohort). This is not contractual SLA compliance.
-- The values are **not inconsistent calculations**: the completion and SLA indicators answer different business questions.
+- The values are **not inconsistent calculations**: the overall closure and critical-cohort indicators answer different business questions.
 
 ## Recommended conversation with functional owners
 

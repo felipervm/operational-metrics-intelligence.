@@ -2,12 +2,12 @@
 from __future__ import annotations
 import csv, json, random, statistics
 from collections import defaultdict, Counter
-from datetime import date, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'data';DATA.mkdir(exist_ok=True)
-BASE=date(2026,7,1)
+BASE=datetime(2026,7,1,9,tzinfo=timezone.utc)
 
 def write_csv(name,rows):
     with (DATA/name).open('w',newline='',encoding='utf-8') as f:
@@ -36,10 +36,10 @@ def dataset():
 def calculate(cases):
     resolved=[x for x in cases if x['status']=='resolved']
     critical=[x for x in cases if x['severity']=='critical']
-    # Deliberate metric drift: IT and Security report on different populations.
+    # Distinct metrics: their populations and completion criteria intentionally differ.
     summaries={
         'IT dashboard':{'numerator':len(resolved),'denominator':len(cases), 'definition':'All resolved tickets / all tickets opened', 'value':round(100*len(resolved)/len(cases),1)},
-        'Security dashboard':{'numerator':sum(x['status']=='resolved' and float(x['elapsed_hours'] or 1e6)<=int(x['sla_hours']) for x in critical), 'denominator':len(critical), 'definition':'Critical tickets resolved inside SLA / all critical tickets', 'value':round(100*sum(x['status']=='resolved' and float(x['elapsed_hours'] or 1e6)<=int(x['sla_hours']) for x in critical)/len(critical),1)}
+        'Security dashboard':{'numerator':sum(x['status']=='resolved' and float(x['elapsed_hours'] or 1e6)<=int(x['sla_hours']) for x in critical), 'denominator':len(critical), 'definition':'Critical tickets resolved within the sample target / all created critical tickets', 'value':round(100*sum(x['status']=='resolved' and float(x['elapsed_hours'] or 1e6)<=int(x['sla_hours']) for x in critical)/len(critical),1)}
     }
     priority=[]
     for sev in ['critical','high','medium','low']:
@@ -58,15 +58,15 @@ def calculate(cases):
     findings=[]
     high=next(x for x in priority if x['severity']=='critical')
     if high['sla_met_pct']<50:
-        findings.append({'priority':'P1','title':'Critical-item response is not meeting the defined SLA',
-                         'observation':f"Only {high['sla_met_pct']}% of critical items meet the defined SLA, counting unresolved items as not met.",
-                         'decision':'Review critical-item routing and escalation thresholds before celebrating the overall closure rate.',
+        findings.append({'priority':'P1','title':'Review critical-cohort completion against the sample target',
+                         'observation':f"{high['sla_met_pct']}% of all created critical items were resolved within the illustrative target. Open items count as incomplete, not proven overdue.",
+                         'decision':'Investigate critical-item routing and target-clock assumptions before assessing operational health.',
                          'proposed_owner':'Security Operations + IT Service Management',
-                         'evidence':'Severity-specific SLA cohort; fictional records','validation':'Confirm SLA clock rules, pause states and severity taxonomy with both teams.'})
+                         'evidence':'Severity-specific created cohort; fictional records','validation':'Confirm target clock rules, pause states and severity taxonomy with both teams.'})
     discrepancy=round(summaries['IT dashboard']['value']-summaries['Security dashboard']['value'],1)
     if discrepancy>10:
-        findings.append({'priority':'P1','title':'One performance label, two incompatible definitions',
-                         'observation':f"The synthetic dashboards show {summaries['IT dashboard']['value']}% and {summaries['Security dashboard']['value']}%, a {discrepancy}-point gap, because the numerator, denominator and SLA treatment differ.",
+        findings.append({'priority':'P1','title':'Keep unlike KPI definitions explicit',
+                         'observation':f"Overall closure is {summaries['IT dashboard']['value']}%; critical intake completed within the sample target is {summaries['Security dashboard']['value']}%. These answer different questions, with different populations and completion criteria.",
                          'decision':'Approve separate names and definitions rather than averaging the two scores.',
                          'proposed_owner':'Enterprise BI + IT + Security','evidence':'Metric contract and dashboard reconciliation',
                          'validation':'Check business purpose and sign off metric glossary with functional owners.'})

@@ -18,7 +18,7 @@ class MetricsTests(unittest.TestCase):
     def test_critical_investigation(self):self.assertLess(self.data['severity'][0]['sla_met_pct'],50)
     def test_no_real_data(self):self.assertIn('synthetic',self.data['scope'].lower())
     def test_page_payload_matches(self):
-        html=(ROOT/'index.html').read_text();import re
+        html=(ROOT/'index.html').read_text(encoding='utf-8');import re
         m=re.search(r'<script id="payload" type="application/json">(.*?)</script>',html,re.S)
         self.assertIsNotNone(m);self.assertEqual(json.loads(m.group(1)),self.data)
 if __name__=='__main__':unittest.main()
